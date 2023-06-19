@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Route, Routes } from "react-router-dom";
+import { Home } from "./components";
+import { BsCart3 } from "react-icons/bs";
+import { Container } from "./components";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header className="py-9">
+        <Container>
+          <div className="flex justify-between">
+            <h1 className="text-4xl font-bold">Kb</h1>
+            <BsCart3 size={"2rem"} />
+          </div>
+        </Container>
       </header>
-    </div>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </main>
+    </>
   );
 }
 
