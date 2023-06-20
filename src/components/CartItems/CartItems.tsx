@@ -5,7 +5,7 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 export default function CartItems() {
   return (
-    <ul className="max-w-7xl mx-auto flex flex-col gap-12">
+    <ul className="max-w-7xl mx-auto flex flex-col gap-12 px-10 xl:px-0">
       <li>
         <CartComponent />
       </li>
@@ -28,9 +28,13 @@ export default function CartItems() {
 const CartComponent = () => {
   let [quantity, setQuantity] = useState(1);
   return (
-    <div className="flex gap-5 h-[40vh]">
+    <div className="flex gap-5 flex-col md:flex-row md:h-[40vh]">
       <div className="relative">
-        <img src={hero1} alt="Demo" className="h-full w-[40vh] object-cover" />
+        <img
+          src={hero1}
+          alt="Demo"
+          className="h-[40vh] w-full md:h-full md:w-[40vh] object-cover"
+        />
         <GrClose
           style={{ position: "absolute", top: "20", left: "20" }}
           size={"1.2rem"}

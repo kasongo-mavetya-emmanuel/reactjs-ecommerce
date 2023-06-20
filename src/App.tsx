@@ -13,7 +13,7 @@ function App() {
     <>
       <header className="py-9">
         <Container>
-          <div className="flex justify-between">
+          <div className="flex justify-between px-10 xl:px-0">
             <h1 className="text-4xl font-bold">Kb</h1>
             {isToggle ? (
               <GrClose

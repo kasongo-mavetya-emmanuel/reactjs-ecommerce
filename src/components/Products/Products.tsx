@@ -8,12 +8,12 @@ const isNonActiveStyle = "px-8 py-4 border border-black";
 
 export default function Products() {
   return (
-    <section className="py-40">
+    <section className="py-20 xl:py-40 px-10 xl:px-0">
       <Container>
         <div>
-          <div className="flex gap-7">
+          <div className="flex flex-col lg:flex-row gap-7">
             <h2 className="text-4xl font-semibold">Products</h2>
-            <ul className="flex items-center">
+            <ul className="flex md:items-center">
               <li>
                 <NavLink
                   to={"/"}
@@ -25,7 +25,6 @@ export default function Products() {
                 </NavLink>
               </li>
               {categories.slice(1).map((category) => {
-                console.log(category);
                 return (
                   <li key={category.id}>
                     <NavLink

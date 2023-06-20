@@ -8,7 +8,7 @@ import {
 export default function Footer() {
   return (
     <footer>
-      <div className="max-w-7xl mx-auto pt-40 pb-12">
+      <div className="max-w-7xl mx-auto px-10 xl:px-0 pt-20 lg:pt-40 pb-12">
         <div className="flex justify-between items-center border-t-2 border-black pt-9">
           <h1 className="text-4xl font-bold">Kb</h1>
           <div className="flex gap-12">

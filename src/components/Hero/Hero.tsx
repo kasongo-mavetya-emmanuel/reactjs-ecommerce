@@ -3,7 +3,7 @@ import hero2 from "../../assets/hero/hero2.jpg";
 
 export default function Hero() {
   return (
-    <section className="flex gap-24  h-[90vh] pl-[13.5rem] py-5">
+    <section className="flex lg:flex-row flex-col lg:gap-24 gap-12 px-10 xl:pr-0 lg:h-[90vh] xl:pl-[13.5rem] lg:py-5 py-3">
       <div className="flex flex-col justify-center">
         <div className="flex flex-col gap-8">
           <h1 className="text-6xl font-bold">KasBracelet</h1>
@@ -19,7 +19,7 @@ export default function Hero() {
             alt="man hand with a bracelet"
           />
         </div>
-        <div className="flex-1/4 flex flex-col justify-center">
+        <div className="lg:flex-1/4 flex-1 flex flex-col justify-center">
           <img
             src={hero2}
             alt="woman hand with a bracelet"
