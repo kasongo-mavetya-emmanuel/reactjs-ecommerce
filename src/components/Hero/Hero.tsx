@@ -19,7 +19,7 @@ export default function Hero() {
             alt="man hand with a bracelet"
           />
         </div>
-        <div className="lg:flex-1/4 flex-1 flex flex-col justify-center">
+        <div className="flex-1/4 flex flex-col justify-center">
           <img
             src={hero2}
             alt="woman hand with a bracelet"

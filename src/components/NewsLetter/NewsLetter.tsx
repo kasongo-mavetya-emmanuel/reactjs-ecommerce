@@ -19,7 +19,7 @@ export default function NewsLetter() {
               </button>
             </form>
           </div>
-          <div className="lg:flex-1 h-[50vh] bg-black ">
+          <div className="lg:flex-1 h-[50vh] lg:h-full bg-black ">
             <img
               src={hero2}
               alt="woman with bracelt"
