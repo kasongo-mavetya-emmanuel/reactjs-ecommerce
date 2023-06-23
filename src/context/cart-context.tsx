@@ -55,3 +55,5 @@ export const CartProvider = ({ children }: any) => {
     </CartContext.Provider>
   );
 };
+
+export default CartContext;

@@ -4,9 +4,11 @@ export const fetchCategories = () => {
 };
 
 export const fetchProducts = (categorySlug: string) => {
-  const query = `*[_type == "product" && category.slug='${categorySlug}'] {_id, 
-    slug, 
-    name, 
+  console.log(categorySlug);
+  const query = `*[_type == "product"] 
+  {_id,
+    slug,
+    name,
     image{
       asset->{url}
     },
@@ -16,6 +18,8 @@ export const fetchProducts = (categorySlug: string) => {
       _id,
       name,
       slug
-     }}`;
+     }
+    }*[category.slug.current== ${categorySlug}]
+  `;
   return query;
 };

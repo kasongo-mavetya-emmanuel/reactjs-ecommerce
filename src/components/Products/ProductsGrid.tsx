@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import hero1 from "../../assets/hero/hero1.jpg";
 import { Container } from "../../components";
 import { FaShoppingCart } from "react-icons/fa";
+import CartContext from "../../context/cart-context";
 
 export default function ProductsGrid({ products }: { products: any[] }) {
   return (
@@ -15,13 +17,20 @@ export default function ProductsGrid({ products }: { products: any[] }) {
 }
 
 const ProductsGridItem = ({ product }: any) => {
+  const { productInCartHandler }: any = useContext(CartContext);
+
   return (
     <div className="flex flex-col gap-3">
       <img src={hero1} alt="some" className="w-full object-cover h-[20rem]" />
       <h3 className="font-semibold font-2xl">{product.name}</h3>
       <div className="flex justify-between items-center">
         <h4 className="text-xl font-semibold">$ {product.price}</h4>
-        <FaShoppingCart size={"1.2rem"} />
+        <FaShoppingCart
+          size={"1.2rem"}
+          onClick={() => {
+            productInCartHandler(product, 1);
+          }}
+        />
       </div>
     </div>
   );

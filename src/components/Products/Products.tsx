@@ -18,34 +18,43 @@ export default function Products() {
 
   useEffect(() => {
     setIsLoadingCat(true);
-    client.fetch(fetchCategories()).then((data) => {
-      console.log(data);
-      setCategories(data);
-      setIsLoadingCat(false);
-    });
+    client
+      .fetch(fetchCategories())
+      .then((data) => {
+        console.log(data);
+        setCategories(data);
+        setIsLoadingCat(false);
+      })
+      .catch((err) => console.log(`dddddddddd${err}`));
   }, []);
 
   useEffect(() => {
     setIsLoadingProd(true);
     if (categoryId) {
-      client.fetch(fetchProducts(categoryId!)).then((data) => {
-        console.log(data);
-        setProducts(data);
-        setIsLoadingProd(false);
-      });
+      client
+        .fetch(fetchProducts(categoryId))
+        .then((data) => {
+          console.log(data);
+          setProducts(data);
+          setIsLoadingProd(false);
+        })
+        .catch((err) => console.log(`dddddddddd${err}`));
     }
 
     if (categories.length !== 0) {
-      client.fetch(categories[0].slug).then((data) => {
-        console.log(data);
-        setProducts(data);
-        setIsLoadingProd(false);
-      });
+      client
+        .fetch(fetchProducts(categories[0].slug.current))
+        .then((data) => {
+          console.log(data);
+          setProducts(data);
+          setIsLoadingProd(false);
+        })
+        .catch((err) => console.log(`dddddddddd${err}`));
     }
   }, [categories, categoryId]);
   return (
     <section className="py-20 xl:py-40 px-10 xl:px-0">
-      <Container>
+      {/* <Container>
         <div>
           <div className="flex flex-col lg:flex-row gap-7">
             <h2 className="text-4xl font-semibold">Products</h2>
@@ -81,12 +90,13 @@ export default function Products() {
               <Route path="/" element={<ProductsGrid products={products} />} />
               <Route
                 path="/category/:categoryId"
-                element={<ProductsGrid products={products} />}
+                element={<div></div>}
+                // element={<ProductsGrid products={products} />}
               />
             </Routes>
           </div>
         </div>
-      </Container>
+      </Container> */}
     </section>
   );
 }
