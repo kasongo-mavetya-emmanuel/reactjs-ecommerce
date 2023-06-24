@@ -3,6 +3,7 @@ import hero1 from "../../assets/hero/hero1.jpg";
 import { GrClose } from "react-icons/gr";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import CartContext from "../../context/cart-context";
+import { urlFor } from "../../client";
 
 export default function CartItems() {
   const { cartItems }: any = useContext(CartContext);
@@ -20,22 +21,19 @@ export default function CartItems() {
 }
 
 const CartComponent = ({ product }: any) => {
-  const { productInCartHandler }: any = useContext(CartContext);
-  let [quantity, setQuantity] = useState(1);
+  const { increaseQuantity, decreaseQuantity }: any = useContext(CartContext);
   return (
     <div className="flex gap-5 flex-col md:flex-row md:h-[40vh]">
       <div className="relative">
         <img
-          src={hero1}
+          src={urlFor(product.image).url()}
           alt="Demo"
           className="h-[40vh] w-full md:h-full md:w-[40vh] object-cover"
         />
         <GrClose
           style={{ position: "absolute", top: "20", left: "20" }}
           size={"1.2rem"}
-          onClick={() => {
-            productInCartHandler(product, 0);
-          }}
+          onClick={() => {}}
         />
       </div>
       <div className="flex flex-col gap-5 justify-center">
@@ -49,22 +47,22 @@ const CartComponent = ({ product }: any) => {
           <AiOutlineMinus
             size={"1.2rem"}
             onClick={() => {
-              setQuantity((prev) => (quantity -= 1));
-              productInCartHandler(product, quantity);
+              decreaseQuantity(product);
             }}
           />
 
-          <span>{quantity}</span>
+          <span>{product.quantity}</span>
           <AiOutlinePlus
             size={"1.2rem"}
             onClick={() => {
-              setQuantity((prev) => (prev += 1));
-              productInCartHandler(product, quantity);
+              increaseQuantity(product);
             }}
           />
         </div>
         <div>
-          <h4 className="text-lg font-medium">SubTotal: $80</h4>
+          <h4 className="text-lg font-medium">
+            SubTotal: ${product.quantity * product.price}
+          </h4>
         </div>
       </div>
     </div>

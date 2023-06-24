@@ -4,8 +4,7 @@ export const fetchCategories = () => {
 };
 
 export const fetchProducts = (categorySlug: string) => {
-  console.log(categorySlug);
-  const query = `*[_type == "product"] 
+  const query = `*[_type == "product" && category->slug.current== "${categorySlug}"] 
   {_id,
     slug,
     name,
@@ -19,7 +18,7 @@ export const fetchProducts = (categorySlug: string) => {
       name,
       slug
      }
-    }*[category.slug.current== ${categorySlug}]
+    }
   `;
   return query;
 };
