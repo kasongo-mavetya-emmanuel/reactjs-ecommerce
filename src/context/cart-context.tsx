@@ -1,94 +1,121 @@
-import { createContext, useState } from "react";
+import React, { createContext, useReducer } from "react";
 
 const CartContext = createContext({});
 
+type CartState = {
+  items: Array<any>;
+  totalAmount: number;
+};
+
+type CartActions = {
+  type: "ADD" | "REMOVE" | "REDUCE";
+  payload: { item: any };
+};
+
+function reducerCart(state: CartState, action: CartActions) {
+  console.log(action.payload.item);
+  const existingItemIndex = state.items.findIndex(
+    (item: { id: any }) => item.id === action.payload.item.id
+  );
+  const existingItem = state.items[existingItemIndex];
+
+  let updatedItems: any[];
+
+  if (action.type === "ADD") {
+    updatedItems = [];
+
+    if (existingItem) {
+      const updatedItem = {
+        ...existingItem,
+        quantity: existingItem.quantity + 1,
+      };
+
+      updatedItems = [...state.items];
+      updatedItems[existingItemIndex] = updatedItem;
+    } else {
+      const updatedItem = {
+        ...action.payload.item,
+        quantity: 1,
+      };
+      console.log(state.items.concat(updatedItem));
+
+      updatedItems = state.items.concat(updatedItem);
+    }
+
+    console.log(updatedItems);
+
+    return {
+      items: updatedItems,
+      totalAmount: state.totalAmount + action.payload.item.price,
+    };
+  } else if (action.type === "REDUCE") {
+    updatedItems = [];
+
+    if (existingItem) {
+      if (existingItem.quantity > 1) {
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity - 1,
+        };
+
+        console.log(updatedItem.quantity);
+
+        updatedItems = [...state.items];
+        updatedItems[existingItemIndex] = updatedItem;
+      } else {
+        updatedItems = state.items.filter(
+          (item: { id: any }) => item.id !== action.payload.item.id
+        );
+      }
+    }
+
+    console.log("fffffff");
+    console.log(updatedItems);
+    return {
+      items: [...updatedItems],
+      totalAmount: state.totalAmount - action.payload.item.price,
+    };
+  } else if (action.type === "REMOVE") {
+    updatedItems = state.items.filter(
+      (item: { id: any }) => item.id !== action.payload.item.id
+    );
+    return {
+      items: updatedItems,
+      totalAmount:
+        state.totalAmount -
+        action.payload.item.price * action.payload.item.quantity,
+    };
+  } else {
+    return state;
+  }
+}
+
 export const CartProvider = ({ children }: any) => {
-  const [cart, setCart] = useState<any[]>([]);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-
-  const checkItem = (product: any) => {
-    const checkItem = cart.find((item: any) => item._id === product._id);
-
-    return checkItem;
-  };
+  const [cartState, dispatchCart] = useReducer(reducerCart, {
+    items: [],
+    totalAmount: 0,
+  });
 
   const addItem = (product: any) => {
-    product.quantity = 1;
-    setCart([...cart, { ...product }]);
-    cart.forEach((item) => {
-      setTotalPrice((prevPrice) => prevPrice + item.price * item.quantity);
-    });
+    dispatchCart({ type: "ADD", payload: { item: product } });
   };
 
-  const increaseQuantity = (product: any) => {
-    setTotalPrice(0);
-
-    if (checkItem(product)) {
-      const updatedCart: any[] = cart.map((item: any) => {
-        if (item._id === product._id) {
-          // setTotalPrice(
-          //   (prevPrice) => prevPrice + item.price * item.quantity++
-          // );
-          console.log(`ssssssssssssssss`);
-          return {
-            ...item,
-            quantity: item.quantity + 1,
-          };
-        } else {
-          setTotalPrice((prevPrice) => prevPrice + item.price * item.quantity);
-          return item;
-        }
-      });
-
-      console.log(cart);
-
-      setCart(updatedCart);
-    } else {
-      addItem(product);
-    }
+  const removeItem = (product: any) => {
+    dispatchCart({ type: "REMOVE", payload: { item: product } });
+    console.log("wwwwwwwwwwwwwwwwww");
+    console.log(cartState.items);
   };
-
-  const decreaseQuantity = (product: any) => {
-    setTotalPrice(0);
-
-    if (checkItem(product)) {
-      const updatedCart: any[] = cart.map((item: any) => {
-        if (item._id === product._id) {
-          // setTotalPrice(
-          //   (prevPrice) => prevPrice + item.price * item.quantity--
-          // );
-          console.log(`ffffffffffffffffffffffff`);
-
-          return {
-            ...item,
-            quantity: item.quantity - 1,
-          };
-        } else {
-          setTotalPrice((prevPrice) => prevPrice + item.price * item.quantity);
-          return item;
-        }
-      });
-
-      console.log(cart);
-
-      setCart(updatedCart);
-    }
+  const reduceItem = (product: any) => {
+    dispatchCart({ type: "REDUCE", payload: { item: product } });
   };
-
-  // const updatedCart = cart.filter((item) => item._id !== product.id);
-  // updatedCart.forEach((item) => {
-  //   setTotalPrice((prevPrice) => prevPrice + item.price * product.quantity);
-  // });
-  // setCart(updatedCart);
 
   return (
     <CartContext.Provider
       value={{
-        cartItems: cart,
-        totalPrice: totalPrice,
-        addItem: addItem,
-        increaseQuantity: increaseQuantity,
-        decreaseQuantity: decreaseQuantity,
+        cartState,
+        addItem,
+        removeItem,
+        reduceItem,
       }}
     >
       {children}

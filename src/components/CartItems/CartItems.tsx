@@ -6,10 +6,10 @@ import CartContext from "../../context/cart-context";
 import { urlFor } from "../../client";
 
 export default function CartItems() {
-  const { cartItems }: any = useContext(CartContext);
+  const { cartState }: any = useContext(CartContext);
   return (
     <ul className="max-w-7xl mx-auto flex flex-col gap-12 px-10 xl:px-0">
-      {cartItems.map((item: any, index: number) => {
+      {cartState.items.map((item: any, index: number) => {
         return (
           <li key={index}>
             <CartComponent product={item} />
@@ -21,7 +21,7 @@ export default function CartItems() {
 }
 
 const CartComponent = ({ product }: any) => {
-  const { increaseQuantity, decreaseQuantity }: any = useContext(CartContext);
+  const { addItem, reduceItem }: any = useContext(CartContext);
   return (
     <div className="flex gap-5 flex-col md:flex-row md:h-[40vh]">
       <div className="relative">
@@ -33,7 +33,9 @@ const CartComponent = ({ product }: any) => {
         <GrClose
           style={{ position: "absolute", top: "20", left: "20" }}
           size={"1.2rem"}
-          onClick={() => {}}
+          onClick={() => {
+            reduceItem(product);
+          }}
         />
       </div>
       <div className="flex flex-col gap-5 justify-center">
@@ -47,7 +49,7 @@ const CartComponent = ({ product }: any) => {
           <AiOutlineMinus
             size={"1.2rem"}
             onClick={() => {
-              decreaseQuantity(product);
+              reduceItem(product);
             }}
           />
 
@@ -55,7 +57,7 @@ const CartComponent = ({ product }: any) => {
           <AiOutlinePlus
             size={"1.2rem"}
             onClick={() => {
-              increaseQuantity(product);
+              addItem(product);
             }}
           />
         </div>
