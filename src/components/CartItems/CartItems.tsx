@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import hero1 from "../../assets/hero/hero1.jpg";
+import React, { useContext } from "react";
 import { GrClose } from "react-icons/gr";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import CartContext from "../../context/cart-context";
@@ -21,7 +20,7 @@ export default function CartItems() {
 }
 
 const CartComponent = ({ product }: any) => {
-  const { addItem, reduceItem }: any = useContext(CartContext);
+  const { addItem, reduceItem, removeItem }: any = useContext(CartContext);
   return (
     <div className="flex gap-5 flex-col md:flex-row md:h-[40vh]">
       <div className="relative">
@@ -34,7 +33,7 @@ const CartComponent = ({ product }: any) => {
           style={{ position: "absolute", top: "20", left: "20" }}
           size={"1.2rem"}
           onClick={() => {
-            reduceItem(product);
+            removeItem(product);
           }}
         />
       </div>

@@ -13,9 +13,8 @@ type CartActions = {
 };
 
 function reducerCart(state: CartState, action: CartActions) {
-  console.log(action.payload.item);
   const existingItemIndex = state.items.findIndex(
-    (item: { id: any }) => item.id === action.payload.item.id
+    (item: { _id: any }) => item._id === action.payload.item._id
   );
   const existingItem = state.items[existingItemIndex];
 
@@ -37,12 +36,9 @@ function reducerCart(state: CartState, action: CartActions) {
         ...action.payload.item,
         quantity: 1,
       };
-      console.log(state.items.concat(updatedItem));
 
       updatedItems = state.items.concat(updatedItem);
     }
-
-    console.log(updatedItems);
 
     return {
       items: updatedItems,
@@ -58,26 +54,22 @@ function reducerCart(state: CartState, action: CartActions) {
           quantity: existingItem.quantity - 1,
         };
 
-        console.log(updatedItem.quantity);
-
         updatedItems = [...state.items];
         updatedItems[existingItemIndex] = updatedItem;
       } else {
         updatedItems = state.items.filter(
-          (item: { id: any }) => item.id !== action.payload.item.id
+          (item: { _id: any }) => item._id !== action.payload.item._id
         );
       }
     }
 
-    console.log("fffffff");
-    console.log(updatedItems);
     return {
       items: [...updatedItems],
       totalAmount: state.totalAmount - action.payload.item.price,
     };
   } else if (action.type === "REMOVE") {
     updatedItems = state.items.filter(
-      (item: { id: any }) => item.id !== action.payload.item.id
+      (item: { _id: any }) => item._id !== action.payload.item._id
     );
     return {
       items: updatedItems,
@@ -102,8 +94,6 @@ export const CartProvider = ({ children }: any) => {
 
   const removeItem = (product: any) => {
     dispatchCart({ type: "REMOVE", payload: { item: product } });
-    console.log("wwwwwwwwwwwwwwwwww");
-    console.log(cartState.items);
   };
   const reduceItem = (product: any) => {
     dispatchCart({ type: "REDUCE", payload: { item: product } });
