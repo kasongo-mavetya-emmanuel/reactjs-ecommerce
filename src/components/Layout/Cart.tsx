@@ -14,6 +14,10 @@ export default function Cart() {
       {
         method: "POST",
         headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers":
+            "Content-Type, Access-Control-Allow-Headers, X-Requested-With,Access-Control-Allow-Methods,Access-Control-Allow-Origin",
+          "Access-Control-Allow-Methods": "GET, POST, OPTION",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(cartState.items),

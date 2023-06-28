@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Home, Cart } from "./components";
+import { Home, Cart, Success } from "./components";
 import { BsCart3 } from "react-icons/bs";
 import { Container } from "./components";
 import { GrClose } from "react-icons/gr";
@@ -39,6 +39,8 @@ function App() {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/canceled" element={<Cart />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </main>
     </>

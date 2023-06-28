@@ -6,5 +6,16 @@ import NewsLetter from "./NewsLetter/NewsLetter";
 import Footer from "./Footer/Footer";
 import Cart from "./Layout/Cart";
 import CartItems from "./CartItems/CartItems";
+import Success from "./Success/Success";
 
-export { Home, Hero, Container, Products, NewsLetter, Footer, Cart, CartItems };
+export {
+  Home,
+  Hero,
+  Container,
+  Products,
+  NewsLetter,
+  Footer,
+  Cart,
+  CartItems,
+  Success,
+};
