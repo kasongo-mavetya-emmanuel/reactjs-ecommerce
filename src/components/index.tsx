@@ -7,6 +7,7 @@ import Footer from "./Footer/Footer";
 import Cart from "./Layout/Cart";
 import CartItems from "./CartItems/CartItems";
 import Success from "./Success/Success";
+import NavBar from "./NavBar/NavBar";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   Cart,
   CartItems,
   Success,
+  NavBar,
 };

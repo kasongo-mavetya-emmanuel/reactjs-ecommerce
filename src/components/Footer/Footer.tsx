@@ -12,15 +12,15 @@ export default function Footer() {
         <div className="flex justify-between items-center border-t-2 border-black pt-9">
           <h1 className="text-4xl font-bold">Kb</h1>
           <div className="flex gap-12">
-            <nav>
+            {/* <nav>
               <ul className="flex flex-col gap-5">
                 <li>Home</li>
                 <li>Cart</li>
                 <li>Products</li>
                 <li>NewsLetter</li>
               </ul>
-            </nav>
-            <ul className="flex flex-col gap-5">
+            </nav> */}
+            <ul className="flex gap-5">
               <li>
                 <FaYoutube size={"1.2rem"} />
               </li>
