@@ -26,7 +26,9 @@ export default function ProductsGrid({ categories }: { categories: any[] }) {
 
           setIsLoadingProd(false);
         })
-        .catch((err) => console.log(`dddddddddd${err}`));
+        .catch((err) => {
+          toast.error("Failed to load products!");
+        });
     } else {
       if (categories.length !== 0) {
         client
@@ -35,7 +37,9 @@ export default function ProductsGrid({ categories }: { categories: any[] }) {
             setProducts(data);
             setIsLoadingProd(false);
           })
-          .catch((err) => console.log(`dddddddddd${err}`));
+          .catch((err) => {
+            toast.error("something went wrong try again!");
+          });
       }
     }
   }, [categoryId, categories]);

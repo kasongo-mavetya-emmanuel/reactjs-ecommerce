@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container } from "../../components";
 import { NavLink, Route, Routes } from "react-router-dom";
 import ProductsGrid from "./ProductsGrid";
@@ -6,10 +6,14 @@ import { fetchCategories } from "../../utils/queries";
 import { client } from "../../client";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import toast from "react-hot-toast";
+import ScrollContext from "../../context/scroll-context";
+
 const isActiveStyle = "px-8 py-4 text-white bg-black border border-black";
 const isNonActiveStyle = "px-8 py-4 border border-black";
 
 export default function Products() {
+  const { productsRef }: any = useContext(ScrollContext);
   const [loadingCat, setIsLoadingCat] = useState(false);
   const [categories, setCategories] = useState<any[]>([]);
 
@@ -21,11 +25,13 @@ export default function Products() {
         setCategories(data);
         setIsLoadingCat(false);
       })
-      .catch((err) => console.log(`dddddddddd${err}`));
+      .catch((err) => {
+        toast.error("Failed to load Categories!");
+      });
   }, []);
 
   return (
-    <section className="py-20 xl:py-40 px-10 xl:px-0">
+    <section ref={productsRef} className="py-20 xl:py-40 px-10 xl:px-0">
       <Container>
         <div>
           <div className="flex flex-col lg:flex-row gap-7">

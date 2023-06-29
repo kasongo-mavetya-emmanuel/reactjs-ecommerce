@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./context/cart-context";
+import { ScrollContextProvider } from "./context/scroll-context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,9 +12,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <CartProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ScrollContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ScrollContextProvider>
     </CartProvider>
   </React.StrictMode>
 );
