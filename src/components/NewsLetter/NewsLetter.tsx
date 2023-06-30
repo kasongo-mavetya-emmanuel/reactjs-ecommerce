@@ -13,12 +13,11 @@ export default function NewsLetter() {
 
     try {
       setIsSubmit(true);
-      const response = await client.create({
+      await client.create({
         _type: "subscriber",
         email: data.get("email"),
         status: "active",
       });
-      console.log(response);
 
       setIsSubmit(false);
       event.target.reset();
