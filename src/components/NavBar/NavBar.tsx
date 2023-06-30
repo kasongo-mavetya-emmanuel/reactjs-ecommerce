@@ -13,7 +13,7 @@ export default function NavBar() {
     <header className="py-9">
       <Container>
         <div className="flex justify-between px-10 xl:px-0">
-          <h1 className="text-4xl font-bold">Kb</h1>
+          <h1 className="text-4xl font-bold">KsB</h1>
           {isToggle ? (
             <GrClose
               size={"2rem"}

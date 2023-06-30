@@ -9,6 +9,7 @@ import { client, urlFor } from "../../client";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import toast from "react-hot-toast";
+import lozad from "lozad";
 
 export default function ProductsGrid({ categories }: { categories: any[] }) {
   const { categoryId } = useParams();
@@ -71,13 +72,21 @@ export default function ProductsGrid({ categories }: { categories: any[] }) {
 
 const ProductsGridItem = ({ product }: any) => {
   const { addItem }: any = useContext(CartContext);
+  useEffect(() => {
+    const observer = lozad();
+    observer.observe();
+    // return () => {
+    //   observer.disconnect();
+    // };
+  }, []);
 
   return (
     <div className="flex flex-col gap-3 overflow-hidden">
       <img
-        src={urlFor(product.image).url()}
+        data-src={urlFor(product.image).url()}
+        data-placeholder-background="#b7b7b7"
         alt="some"
-        className="w-full object-cover h-[20rem] hover:scale-110 ease-in duration-300"
+        className="w-full object-cover h-[20rem] hover:scale-110 ease-in duration-300 lozad"
       />
       <h3 className="font-semibold font-2xl">{product.name}</h3>
       <div className="flex justify-between items-center">

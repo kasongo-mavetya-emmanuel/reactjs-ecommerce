@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import hero1 from "../../assets/hero/hero1.jpg";
-import hero2 from "../../assets/hero/hero2.jpg";
+import hero1 from "../../assets/hero/hero1.webp";
+import hero2 from "../../assets/hero/hero2.webp";
 import ScrollContext from "../../context/scroll-context";
 
 export default function Hero() {
@@ -22,16 +22,18 @@ export default function Hero() {
       <div className="flex gap-5 flex-1">
         <div className="flex-1">
           <img
-            className="h-full w-full"
-            src={hero1}
+            className="h-full w-full lozad"
+            data-src={hero1}
+            data-placeholder-background="#b7b7b7"
             alt="man hand with a bracelet"
           />
         </div>
         <div className="flex-1/4 flex flex-col justify-center">
           <img
-            src={hero2}
+            data-src={hero2}
+            data-placeholder-background="#b7b7b7"
             alt="woman hand with a bracelet"
-            className="h-[60%] w-full"
+            className="h-[60%] w-full lozad"
           />
         </div>
       </div>
