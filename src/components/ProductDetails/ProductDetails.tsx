@@ -52,8 +52,10 @@ function Suggestions() {
     }
   }, [categoryId]);
   return (
-    <div className="relative w-full overflow-hidden">
-      <div className={`flex gap-5 ${classes["track"]}`}>
+    <div className={`${classes["marquee"]}`}>
+      <div
+        className={`${classes["maylike-products-container"]} ${classes["track"]}`}
+      >
         <ProductsGridItem />
         <ProductsGridItem />
         <ProductsGridItem />

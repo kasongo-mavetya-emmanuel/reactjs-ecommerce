@@ -1,7 +1,14 @@
+.marquee {
+  position: relative;
+  height: 500px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .track {
   position: absolute;
-  white-space: nowrap;
-  will-change: transform;
+  /* white-space: nowrap;
+  will-change: transform; */
   animation: marquee 15s linear infinite;
   width: 180%;
 }
@@ -15,4 +22,11 @@
   to {
     transform: translateX(-50%);
   }
+}
+
+.maylike-products-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
