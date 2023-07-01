@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import hero2 from "../../assets/hero/hero2.jpg";
+import hero2 from "../../assets/hero/hero2.webp";
 import { toast } from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 import { client } from "../../client";

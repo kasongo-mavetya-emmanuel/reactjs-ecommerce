@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, Cart, Success, NavBar } from "./components";
+import { Home, Cart, Success, NavBar, ProductDetails } from "./components";
 import { Toaster } from "react-hot-toast";
 import lozad from "lozad";
 
@@ -18,8 +18,9 @@ function App() {
       <NavBar />
       <main>
         <Routes>
-          <Route path="/*" element={<Home />} />
+          {/* <Route path="/*" element={<Home />} /> */}
           <Route path="/cart" element={<Cart />} />
+          <Route path="/*" element={<ProductDetails />} />
           <Route path="/canceled" element={<Cart />} />
           <Route path="/success" element={<Success />} />
         </Routes>

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { GrClose } from "react-icons/gr";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import CartContext from "../../context/cart-context";
 import { urlFor } from "../../client";
+import { Quantity } from "../../components";
 
 export default function CartItems() {
   const { cartState }: any = useContext(CartContext);
@@ -44,22 +44,15 @@ const CartComponent = ({ product }: any) => {
             <span>Price:</span>$ {product.price}
           </h4>
         </div>
-        <div className="flex gap-5 border border-1 border-black justify-between items-center px-5 py-3">
-          <AiOutlineMinus
-            size={"1.2rem"}
-            onClick={() => {
-              reduceItem(product);
-            }}
-          />
-
-          <span>{product.quantity}</span>
-          <AiOutlinePlus
-            size={"1.2rem"}
-            onClick={() => {
-              addItem(product);
-            }}
-          />
-        </div>
+        <Quantity
+          onIncrease={() => {
+            addItem(product);
+          }}
+          onDescrease={() => {
+            reduceItem(product);
+          }}
+          quantity={product.quantity}
+        />
         <div>
           <h4 className="text-lg font-medium">
             SubTotal: ${product.quantity * product.price}

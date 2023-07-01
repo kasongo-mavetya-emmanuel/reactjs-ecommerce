@@ -8,6 +8,10 @@ import Cart from "./Layout/Cart";
 import CartItems from "./CartItems/CartItems";
 import Success from "./Success/Success";
 import NavBar from "./NavBar/NavBar";
+import ProductDetails from "./ProductDetails/ProductDetails";
+import Quantity from "./UI/Quantity";
+import ProductsGridItem from "./UI/ProductGridItem";
+import ProductSkeleton from "./UI/ProductSkeleton";
 
 export {
   Home,
@@ -20,4 +24,8 @@ export {
   CartItems,
   Success,
   NavBar,
+  ProductDetails,
+  Quantity,
+  ProductsGridItem,
+  ProductSkeleton,
 };
