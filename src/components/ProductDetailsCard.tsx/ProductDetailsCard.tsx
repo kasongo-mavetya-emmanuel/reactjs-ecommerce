@@ -1,17 +1,19 @@
 import { useState, useContext, useCallback, useEffect } from "react";
 import { Container, Quantity } from "..";
 import toast from "react-hot-toast";
-import lozad from "lozad";
 import { client, urlFor } from "../../client";
 import CartContext from "../../context/cart-context";
 import { useParams } from "react-router-dom";
 import { fetchProduct } from "../../utils/queries";
 import Skeleton from "react-loading-skeleton";
+import getStripe from "../../utils/getStripe";
+import { Oval } from "react-loader-spinner";
 
 export default function ProductDetailsCard() {
   const [quantity, setQuantity] = useState(1);
   const { addItem }: any = useContext(CartContext);
   const [product, setProduct] = useState<any>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const addToCartHandler = useCallback(() => {
     addItem(product);
@@ -27,7 +29,6 @@ export default function ProductDetailsCard() {
       client
         .fetch(fetchProduct(productId))
         .then((data) => {
-          console.log(data[0]);
           setProduct(data[0]);
           setIsLoadingProd(false);
         })
@@ -37,27 +38,62 @@ export default function ProductDetailsCard() {
     }
   }, [productId]);
 
-  useEffect(() => {
-    const observer = lozad();
-    observer.observe();
-    // return () => {
-    //   observer.disconnect();
-    // };
-  }, []);
+  const checkoutHandler = useCallback(async () => {
+    try {
+      if (quantity === 0) {
+        toast.error("Quantity cannot be 0");
+        return;
+      }
 
+      setIsSubmitting(true);
+      console.log(product);
+      const stripe = await getStripe();
+
+      const response = await fetch(
+        "http://localhost:9999/.netlify/functions/stripe-checkout",
+        {
+          method: "POST",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+              "Content-Type, Access-Control-Allow-Headers, X-Requested-With,Access-Control-Allow-Methods,Access-Control-Allow-Origin",
+            "Access-Control-Allow-Methods": "GET, POST, OPTION",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([{ ...product, quantity: quantity }]),
+        }
+      );
+
+      if (response.status > 400) {
+        setIsSubmitting(false);
+        toast.error("something went wrong try again!");
+
+        return;
+      }
+
+      const data = await response.json();
+
+      setIsSubmitting(false);
+
+      toast.loading("Redirecting...");
+
+      stripe?.redirectToCheckout({ sessionId: data.id });
+    } catch (e) {
+      toast.error("something went wrong try again!");
+    }
+  }, [product, quantity]);
   return (
     <Container>
-      <div className="flex justify-center">
+      <div className="flex justify-center px-11 xl:px-0">
         <div className="flex gap-20 flex-col md:flex-row ">
           <div>
             {loadingProd ? (
               <Skeleton height={"70vh"} width={"45vh"} />
             ) : (
               <img
-                data-src={urlFor(product.image).url()}
-                data-placeholder-background="#b7b7b7"
+                src={urlFor(product.image).url()}
                 alt="product"
-                className="h-[50vh] w-full md:h-full md:w-[60vh] object-cover lozad"
+                className="h-[60vh] w-full md:h-[60vh] md:w-[60vh] object-cover"
               />
             )}
           </div>
@@ -96,7 +132,7 @@ export default function ProductDetailsCard() {
                   />
                 )}
               </div>
-              <div className="flex gap-9">
+              <div className="flex flex-col xl:flex-row gap-9">
                 {loadingProd ? (
                   <Skeleton height={"5rem"} width={"10rem"} />
                 ) : (
@@ -110,8 +146,26 @@ export default function ProductDetailsCard() {
                 {loadingProd ? (
                   <Skeleton height={"5rem"} width={"10rem"} />
                 ) : (
-                  <button className="text-white bg-black py-5 px-9">
-                    Checkout
+                  <button
+                    className="text-white bg-black py-5 px-9 text-center"
+                    onClick={checkoutHandler}
+                  >
+                    {isSubmitting ? (
+                      <Oval
+                        height={20}
+                        width={20}
+                        color="#fff"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#444"
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
+                      />
+                    ) : (
+                      " Checkout"
+                    )}
                   </button>
                 )}
               </div>

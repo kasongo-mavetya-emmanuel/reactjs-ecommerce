@@ -7,14 +7,16 @@ export default function ProductDetails() {
   return (
     <article>
       <Container>
-        <Link to={"/"}>
-          <FaArrowLeft
-            style={{
-              cursor: "pointer",
-            }}
-            size={"1.4rem"}
-          />
-        </Link>
+        <div className="p-11 xl:p-0">
+          <Link to={"/"}>
+            <FaArrowLeft
+              style={{
+                cursor: "pointer",
+              }}
+              size={"1.4rem"}
+            />
+          </Link>
+        </div>
       </Container>
       <ProductDetailsCard />
       <Container>

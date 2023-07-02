@@ -38,21 +38,21 @@ const CartComponent = ({ product }: any) => {
         />
       </div>
       <div className="flex flex-col gap-5 justify-center">
-        <h3 className="font-semibold text-2xl">Lorem Simson</h3>
+        <h3 className="font-bold text-2xl">{product.name}</h3>
         <div>
-          <h4 className="text-lg font-semibold">
-            <span>Price:</span>$ {product.price}
-          </h4>
+          <h4 className="text-lg font-bold">$ {product.price}</h4>
         </div>
-        <Quantity
-          onIncrease={() => {
-            addItem(product);
-          }}
-          onDescrease={() => {
-            reduceItem(product);
-          }}
-          quantity={product.quantity}
-        />
+        <div>
+          <Quantity
+            onIncrease={() => {
+              addItem(product);
+            }}
+            onDescrease={() => {
+              reduceItem(product);
+            }}
+            quantity={product.quantity}
+          />
+        </div>
         <div>
           <h4 className="text-lg font-medium">
             SubTotal: ${product.quantity * product.price}

@@ -34,7 +34,11 @@ export default function Cart() {
         }
       );
 
-      if (response.status > 400) return;
+      if (response.status > 400) {
+        toast.error("something went wrong try again!");
+
+        return;
+      }
 
       const data = await response.json();
 
@@ -52,7 +56,7 @@ export default function Cart() {
       <CartItems />
       <div className=" right-[3rem] xl:right-[13.5rem] md:fixed pt-10 md:pt-0 bottom-[2rem]">
         <div className="flex flex-col gap-5">
-          <h4 className="text-2xl font-semibold">
+          <h4 className="text-2xl font-semibold pl-11 xl:pl-0">
             Total: $ {cartState.totalAmount}
           </h4>
           <button
