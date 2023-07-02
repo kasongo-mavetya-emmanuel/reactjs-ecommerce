@@ -5,8 +5,10 @@ import { FaCartPlus } from "react-icons/fa";
 import toast from "react-hot-toast";
 import lozad from "lozad";
 import hero1 from "../../assets/hero/hero1.webp";
+import { useNavigate } from "react-router-dom";
 
 const ProductsGridItem = ({ product }: any) => {
+  const navigate = useNavigate();
   const { addItem }: any = useContext(CartContext);
   useEffect(() => {
     const observer = lozad();
@@ -16,20 +18,24 @@ const ProductsGridItem = ({ product }: any) => {
     // };
   }, []);
 
+  const goToProducHandler = () => {
+    navigate(
+      `/product/${product.category.slug.current}/${product.slug.current}`
+    );
+  };
+
   return (
     <div className="flex flex-col gap-3 overflow-hidden">
       <img
-        // data-src={urlFor(product.image).url()}
-        src={hero1}
+        data-src={urlFor(product.image).url()}
         data-placeholder-background="#b7b7b7"
         alt="some"
-        className="w-full object-cover h-[20rem] hover:scale-110 ease-in duration-300 lozad"
+        className="w-full object-cover h-[20rem] hover:scale-110 ease-in duration-300 cursor-pointer lozad"
+        onClick={goToProducHandler}
       />
-      {/* <h3 className="font-semibold font-2xl">{product.name}</h3> */}
-      <h3 className="font-semibold font-2xl">Emma</h3>
+      <h3 className="font-semibold font-2xl">{product.name}</h3>
       <div className="flex justify-between items-center">
-        {/* <h4 className="text-xl font-semibold">$ {product.price}</h4> */}
-        <h4 className="text-xl font-semibold">$ 55</h4>
+        <h4 className="text-xl font-semibold">$ {product.price}</h4>
         <FaCartPlus
           size={"1.2rem"}
           scale={"2"}

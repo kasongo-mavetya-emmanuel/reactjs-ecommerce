@@ -22,3 +22,23 @@ export const fetchProducts = (categorySlug: string) => {
   `;
   return query;
 };
+
+export const fetchProduct = (productSlug: string) => {
+  const query = `*[_type == "product" && slug.current== "${productSlug}"] 
+  {_id,
+    slug,
+    name,
+    image{
+      asset->{url}
+    },
+    price,
+     description,
+     category->{
+      _id,
+      name,
+      slug
+     }
+    }
+  `;
+  return query;
+};

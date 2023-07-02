@@ -8,7 +8,7 @@
 .track {
   position: absolute;
   /* white-space: nowrap;
-  will-change: transform; */
+    will-change: transform; */
   animation: marquee 15s linear infinite;
   width: 180%;
 }

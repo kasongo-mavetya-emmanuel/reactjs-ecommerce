@@ -18,9 +18,12 @@ function App() {
       <NavBar />
       <main>
         <Routes>
-          {/* <Route path="/*" element={<Home />} /> */}
+          <Route path="/*" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/*" element={<ProductDetails />} />
+          <Route
+            path="/product/:categoryId/:productId"
+            element={<ProductDetails />}
+          />
           <Route path="/canceled" element={<Cart />} />
           <Route path="/success" element={<Success />} />
         </Routes>
