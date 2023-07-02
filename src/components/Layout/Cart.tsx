@@ -20,7 +20,7 @@ export default function Cart() {
       const stripe = await getStripe();
 
       const response = await fetch(
-        "http://localhost:9999/.netlify/functions/stripe-checkout",
+        "https://kasbracelets.netlify.app/.netlify/functions/stripe-checkout",
         {
           method: "POST",
           headers: {

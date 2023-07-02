@@ -58,7 +58,6 @@ exports.handler = async function (event, context) {
 
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create(params);
-      console.log(session);
       return {
         statusCode: 200,
         headers: {
@@ -71,7 +70,6 @@ exports.handler = async function (event, context) {
         body: JSON.stringify(session),
       };
     } catch (err) {
-      console.log(err);
       return {
         statusCode: err.statusCode || 500,
         body: JSON.stringify({
