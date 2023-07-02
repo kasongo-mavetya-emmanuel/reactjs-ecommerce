@@ -4,7 +4,6 @@ import { urlFor } from "../../client";
 import { FaCartPlus } from "react-icons/fa";
 import toast from "react-hot-toast";
 import lozad from "lozad";
-import hero1 from "../../assets/hero/hero1.webp";
 import { useNavigate } from "react-router-dom";
 
 const ProductsGridItem = ({ product }: any) => {
