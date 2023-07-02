@@ -131,7 +131,7 @@ export default function ProductDetailsCard() {
                   />
                 )}
               </div>
-              <div className="flex flex-col xl:flex-row gap-9">
+              <div className="flex flex-col md:flex-row gap-9">
                 {loadingProd ? (
                   <Skeleton height={"5rem"} width={"10rem"} />
                 ) : (
