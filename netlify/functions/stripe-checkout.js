@@ -1,7 +1,6 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async function (event, context) {
-  console.log(event);
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
@@ -59,7 +58,6 @@ exports.handler = async function (event, context) {
 
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create(params);
-      console.log(session);
       return {
         statusCode: 200,
         headers: {
